@@ -12,28 +12,30 @@ startButton.addEventListener('click', () => {
 let scene, camera, renderer, controls;
 let sun, planets = [];
 
-// Planet Data with textures
+// Planet Data with textures and descriptions
 const planetData = [
     {
         name: 'Mercury',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Mercury_in_True_Color.jpg',
         radius: 1.5,
         distance: 10,
-        speed: 0.02
+        speed: 0.002, // slower speed
+        description: 'Mercury is the smallest planet in our solar system and the closest to the Sun.'
     },
     {
         name: 'Venus',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Venus_surface.jpg',
         radius: 3.5,
         distance: 15,
-        speed: 0.015
+        speed: 0.0015, // slower speed
+        description: 'Venus is the second planet from the Sun and is similar in structure to Earth.'
     },
     {
         name: 'Earth',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_%28planet%29.jpg',
         radius: 4,
         distance: 20,
-        speed: 0.01,
+        speed: 0.001, // slower speed
         satellites: [
             {
                 name: 'Moon',
@@ -48,14 +50,15 @@ const planetData = [
                 texture: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Hubble_Space_Telescope.png',
                 distance: 6
             }
-        ]
+        ],
+        description: 'Earth is the third planet from the Sun and the only astronomical object known to harbor life.'
     },
     {
         name: 'Mars',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Mars_viking.jpg',
         radius: 3,
         distance: 25,
-        speed: 0.008,
+        speed: 0.0008, // slower speed
         satellites: [
             {
                 name: 'Phobos',
@@ -69,35 +72,40 @@ const planetData = [
                 radius: 0.5,
                 distance: 3
             }
-        ]
+        ],
+        description: 'Mars is the fourth planet from the Sun and is known for its red color.'
     },
     {
         name: 'Jupiter',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg',
         radius: 10,
         distance: 40,
-        speed: 0.005
+        speed: 0.0005, // slower speed
+        description: 'Jupiter is the largest planet in our solar system, known for its Great Red Spot.'
     },
     {
         name: 'Saturn',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Saturn.jpg',
         radius: 9,
         distance: 50,
-        speed: 0.004
+        speed: 0.0003, // slower speed
+        description: 'Saturn is famous for its stunning rings and is the second largest planet in the solar system.'
     },
     {
         name: 'Uranus',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Uranus.jpg',
         radius: 7,
         distance: 60,
-        speed: 0.003
+        speed: 0.0001, // slower speed
+        description: 'Uranus is the third largest planet in our solar system and has a unique blue color.'
     },
     {
         name: 'Neptune',
         texture: 'https://upload.wikimedia.org/wikipedia/commons/2/26/Neptune.jpg',
         radius: 7,
         distance: 70,
-        speed: 0.002
+        speed: 0.00005, // slower speed
+        description: 'Neptune is known for its deep blue color and is the farthest planet from the Sun.'
     }
 ];
 
@@ -105,7 +113,7 @@ function init() {
     // Scene setup
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
@@ -113,17 +121,16 @@ function init() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040, 2);
-    scene.add(ambientLight);
+    // Background stars
+    const starGeometry = new THREE.SphereGeometry(100, 32, 32);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0x555555, side: THREE.BackSide });
+    const stars = new THREE.Mesh(starGeometry, starMaterial);
+    scene.add(stars);
 
-    const pointLight = new THREE.PointLight(0xffffff, 1.5);
-    pointLight.position.set(0, 0, 0);  // Light source from the Sun
-    scene.add(pointLight);
-
-    // Sun
+    // Sun with texture
+    const sunTexture = new THREE.TextureLoader().load('https://upload.wikimedia.org/wikipedia/commons/4/42/Sun_large.jpg'); // Sun texture
     const sunGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+    const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
     sun = new THREE.Mesh(sunGeometry, sunMaterial);
     scene.add(sun);
 
@@ -140,7 +147,7 @@ function init() {
         });
         const planet = new THREE.Mesh(planetGeometry, planetMaterial);
         planet.position.set(data.distance, 0, 0);
-        planet.userData = { name: data.name, speed: data.speed, distance: data.distance, satellites: data.satellites  [], spaceObjects: data.spaceObjects  [] };
+        planet.userData = { name: data.name, speed: data.speed, distance: data.distance, satellites: data.satellites || [], spaceObjects: data.spaceObjects || [], description: data.description };
 
         planets.push(planet);
         scene.add(planet);
@@ -187,7 +194,13 @@ function onPlanetClick(event) {
         controls.target.set(selectedPlanet.position.x, selectedPlanet.position.y, selectedPlanet.position.z);
 
         // Display planet information
-        alert(`You clicked on ${planetData.name}`);
+        const infoContainer = document.getElementById('infoContainer');
+        infoContainer.innerHTML = `
+            <div style="backdrop-filter: blur(5px); padding: 10px; color: white;">
+                <h2>${planetData.name}</h2>
+                <p>${planetData.description}</p>
+            </div>
+        `;
 
         // If Earth is clicked, display satellites and nearby objects
         if (planetData.name === 'Earth') {
