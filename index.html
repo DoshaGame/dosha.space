@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar System 3D</title>
+    <title>Solar System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="startScreen">
+    <div id="container" style="display: none;"></div>
+    <div id="start">
         <button id="startButton">Start</button>
     </div>
-    <div id="container" style="display:none;"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <div id="infoContainer" style="position: absolute; top: 10px; left: 10px; z-index: 10;"></div>
+    <!-- Подключаем Three.js и OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
