@@ -16,7 +16,7 @@ let sun, planets = [];
 const planetData = [
     {
         name: 'Mercury',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Mercury_in_True_Color.jpg',
+        texture: '',
         radius: 1.5,
         distance: 10,
         speed: 0.002, // slower speed
@@ -24,7 +24,7 @@ const planetData = [
     },
     {
         name: 'Venus',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Venus_surface.jpg',
+        texture: '',
         radius: 3.5,
         distance: 15,
         speed: 0.0015, // slower speed
@@ -32,14 +32,14 @@ const planetData = [
     },
     {
         name: 'Earth',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_%28planet%29.jpg',
+        texture: '',
         radius: 4,
         distance: 20,
         speed: 0.001, // slower speed
         satellites: [
             {
                 name: 'Moon',
-                texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Moon_2024.jpg',
+                texture: '',
                 radius: 1,
                 distance: 5
             }
@@ -47,7 +47,7 @@ const planetData = [
         spaceObjects: [
             {
                 name: 'Hubble Space Telescope',
-                texture: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Hubble_Space_Telescope.png',
+                texture: '',
                 distance: 6
             }
         ],
@@ -55,20 +55,20 @@ const planetData = [
     },
     {
         name: 'Mars',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Mars_viking.jpg',
+        texture: '',
         radius: 3,
         distance: 25,
         speed: 0.0008, // slower speed
         satellites: [
             {
                 name: 'Phobos',
-                texture: 'https://upload.wikimedia.org/wikipedia/commons/4/49/Phobos.jpg',
+                texture: '',
                 radius: 0.5,
                 distance: 2
             },
             {
                 name: 'Deimos',
-                texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Deimos.jpg',
+                texture: '',
                 radius: 0.5,
                 distance: 3
             }
@@ -77,7 +77,7 @@ const planetData = [
     },
     {
         name: 'Jupiter',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg',
+        texture: '',
         radius: 10,
         distance: 40,
         speed: 0.0005, // slower speed
@@ -85,7 +85,7 @@ const planetData = [
     },
     {
         name: 'Saturn',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Saturn.jpg',
+        texture: '',
         radius: 9,
         distance: 50,
         speed: 0.0003, // slower speed
@@ -93,7 +93,7 @@ const planetData = [
     },
     {
         name: 'Uranus',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Uranus.jpg',
+        texture: '',
         radius: 7,
         distance: 60,
         speed: 0.0001, // slower speed
@@ -101,7 +101,7 @@ const planetData = [
     },
     {
         name: 'Neptune',
-        texture: 'https://upload.wikimedia.org/wikipedia/commons/2/26/Neptune.jpg',
+        texture: '',
         radius: 7,
         distance: 70,
         speed: 0.00005, // slower speed
