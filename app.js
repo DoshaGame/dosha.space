@@ -16,7 +16,7 @@ let sun, planets = [];
 const planetData = [
     {
         name: 'Mercury',
-        texture: '',
+        texture: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ffotoblik.ru%2Ftekstura-planety-besshovnaya&psig=AOvVaw0owimm5dElMP5HiqpGjzt0&ust=1728203474343000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPCn4-jp9ogDFQAAAAAdAAAAABAJ',
         radius: 1.5,
         distance: 10,
         speed: 0.002, // slower speed
